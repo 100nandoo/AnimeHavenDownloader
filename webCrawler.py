@@ -1,16 +1,24 @@
 import requests
+import sys
 from bs4 import BeautifulSoup
 
 ep_link = None
 tiwi_link = None
 hash = None
 video_link = None
+quality = 'h'
 
-def main(start, end):
+def main():
+    global quality
+    source = sys.argv[1]
+    start = int(sys.argv[2])
+    end = int(sys.argv[3])
+    quality = str(sys.argv[4])
     border = start + (end-start)
     file = open('video-link-list.txt', 'w')
     while start <= border:
-        url = 'http://animehaven.to/episodes/subbed/fairy-tail/page' + str(start)
+        url = source + str(start)
+        print('url: ' + url)
         source_code = requests.get(url)
         plain_text = source_code.text
         soup = BeautifulSoup(plain_text, "html.parser")
@@ -44,7 +52,7 @@ def get_hash(source):
     for download in soup.findAll(href='#', string='Normal quality'):
         videolink = download.get('onclick')
         global hash
-        hash = 'http://tiwi.kiwi/dl?op=download_orig&id=' + videolink.split("'")[1] + '&mode=' + videolink.split("'")[3] + '&hash=' + videolink.split("'")[5]
+        hash = 'http://tiwi.kiwi/dl?op=download_orig&id=' + videolink.split("'")[1] + '&mode=' + quality + '&hash=' + videolink.split("'")[5]
         #print('hash: ' + hash)
 
 def get_video_link(source):
@@ -56,4 +64,4 @@ def get_video_link(source):
         video_link = last.get('href')
         #print(video_link)
 
-main(22, 22)
+main()
