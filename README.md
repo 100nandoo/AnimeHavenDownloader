@@ -10,6 +10,6 @@ Currently only Animehaven.to
 2.
 
 ## Technical Information
-Written in python, using BeautifulSoup library. More info about BeautifulSoup: https://www.crummy.com/software/BeautifulSoup/
-
-Technically this program episode page from certain Anime Title you input, then the crawler will grab the video link. You can choose the quality of the video (low,medium,high).
+Written in python, using BeautifulSoup library. 
+More info about BeautifulSoup: https://www.crummy.com/software/BeautifulSoup/
+Technically this is a command line program that crawl certain amount of episode pages from certain Anime Title you input, then the crawler will grab the video link. You can choose the quality of the video (low,medium,high).
